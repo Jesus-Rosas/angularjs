@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="directoryApp">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS for everyone</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<script src="directoryApp.js"></script>
+</head>
+<body ng-controller="directoryController as dirList">
+	<input type="text" ng-model="search">
+	<ul>
+		<li ng-repeat="item in dirList.list | filter:search | limitTo:3 | orderBy: 'age'" class="person-{{item.name | lowercase}}">
+			{{item.name }} - {{item.age | currency:"&yen;":0}} 
+		</li>
+	</ul>
+	<form ng-submit="dirList.addPerson()">
+		<input type="text" placeholder="Name" ng-model="dirList.name">
+		<input type="text" placeholder="Age" ng-model="dirList.age">
+		<input type="submit" value="Submit">	
+	</form>
+</body>
+</html>
